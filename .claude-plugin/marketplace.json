@@ -1,0 +1,17 @@
+{
+  "name": "illusionalsagacity-claude-plugins",
+  "owner": {
+    "name": "illusionalsagacity",
+    "email": "1661092+illusionalsagacity@users.noreply.github.com"
+  },
+  "plugins": [
+    {
+      "name": "rescript-lsp",
+      "description": "Rescript Language Server Plugin - Auto-formats ReScript files after Write/Edit operations",
+      "license": "MIT",
+      "repository": "https://github.com/illusionalsagacity/claude-plugins/tree/master/rescript",
+      "source": "./rescript",
+      "keywords": ["rescript", "lsp", "language server", "formatting"]
+    }
+  ]
+}
