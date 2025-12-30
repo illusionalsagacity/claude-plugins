@@ -1,7 +1,7 @@
 {
   "name": "rescript-lsp",
   "description": "Rescript Language Server Plugin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "rob <1661092+illusionalsagacity@users.noreply.github.com>"
   },
@@ -12,7 +12,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "jq -r '.tool_input.file_path' | xargs npx rescript format"
+            "command": "jq -r '.tool_input.file_path | select(endswith(\".res\"))' | xargs npx rescript format"
           }
         ]
       }
