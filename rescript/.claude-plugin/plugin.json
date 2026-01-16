@@ -5,6 +5,10 @@
   "author": {
     "name": "rob <1661092+illusionalsagacity@users.noreply.github.com>"
   },
+  "agents": [
+    "../agents/rescript-bindings-planner.md",
+    "../agents/rescript-bindings-writer.md"
+  ],
   "hooks": {
     "PostToolUse": [
       {
