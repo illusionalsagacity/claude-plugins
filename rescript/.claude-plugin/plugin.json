@@ -1,10 +1,11 @@
 {
   "name": "rescript-lsp",
   "description": "Rescript Language Server Plugin",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "author": {
     "name": "rob <1661092+illusionalsagacity@users.noreply.github.com>"
   },
+  "agents": ["../agents/rescript-bindings-writer.md"],
   "hooks": {
     "PostToolUse": [
       {
