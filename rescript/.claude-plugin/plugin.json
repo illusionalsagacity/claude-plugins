@@ -1,7 +1,7 @@
 {
   "name": "rescript-lsp",
   "description": "Rescript Language Server Plugin",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
     "name": "rob <1661092+illusionalsagacity@users.noreply.github.com>"
   },

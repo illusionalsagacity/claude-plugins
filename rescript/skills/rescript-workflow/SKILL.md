@@ -153,6 +153,47 @@ Ready for final review?
 
 ---
 
+## Bug Fixes
+
+Bug fixes follow the same phased workflow. The discipline of understanding first, writing a failing test, then fixing ensures you're solving the actual problem rather than masking symptoms.
+
+### Bug Fix Process
+
+1. **Understand first** - Read the code exhibiting the bug and trace the data flow
+2. **Write a failing test** - Reproduce the bug in a test before attempting any fix. This:
+   - Confirms you understand the actual problem
+   - Prevents regressions
+   - Serves as documentation of the edge case
+3. **If the fix requires new functions**, use `%todo` skeletons with type annotations
+4. **Implement the fix** - Make the failing test pass
+5. **Verify** - Run tests, then `rescript --warn-error +110`
+
+### Example: Fixing a Boundary Condition
+
+```rescript
+// 1. Failing test that reproduces the bug
+it("handles empty column when moving task", t => {
+  let board = Board.empty()
+  let result = BoardOperations.moveTask(board, ~taskId, ~toColumn=columnId)
+
+  t->expect(result)->toEqual(Error(ColumnNotFound(columnId)))
+})
+
+// 2. If fixing requires new logic, sketch with %todo
+let findColumn: (Board.t, ColumnId.t) => option<Column.t> =
+  %todo("Find column by ID, return None if not found")
+
+// 3. Implement the fix
+// 4. Verify tests pass and no %todo remains
+```
+
+**Do not skip the failing test.** It's tempting to jump straight to fixing, but without a test:
+- You might fix the wrong thing
+- The bug can silently return later
+- You lose the opportunity to document the edge case
+
+---
+
 ## Refactoring
 
 ReScript's compiler halts progress until the program type-checks. This differs from TypeScript/JavaScript where you can run partially broken code and discover issues at runtime. Without a strategy, refactoring can leave you stuck in a non-compiling state, chasing type errors reactively.
