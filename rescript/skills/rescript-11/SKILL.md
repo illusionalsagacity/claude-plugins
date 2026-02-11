@@ -115,3 +115,21 @@ let result = stringify(obj)
 ```
 
 **Common mistake:** Forgetting that this behavior exists and manually handling undefined, or being surprised when a JS API works correctly without explicit undefined passing.
+
+### Inline Record Scoping in Variants
+
+Inline record fields destructured via punning carry an anonymous type scoped to their constructor. The binding can't escape into another constructor position, even if the inline record shape is identical:
+
+```rescript
+type state = Idle({items: array<item>}) | Active({items: array<item>})
+
+// Wrong — `items` carries Idle's anonymous record type, can't be used in Idle(...)
+switch (state, action) {
+| (Idle({items}), Reset) => Idle({items})  // Type error!
+}
+
+// Correct — alias the field to avoid the escaping anonymous type
+switch (state, action) {
+| (Idle({items: i}), Reset) => Idle({items: i})
+}
+```
