@@ -128,6 +128,14 @@ external useQueryStates: myParsers => (myValues, setQueryStates<myValues>) = "us
 
 This pattern gives library authors safe defaults while letting application developers opt into precise types when they control both sides.
 
+### Consider the Call Site
+
+TypeScript types tell you what a value *is*, but the right ReScript type depends on how it will be *used*. When a TypeScript type is overly dynamic (mapped types, `Record<string, T>`, index signatures), ask: what does the consumer actually do with this value?
+
+For example, if a library returns `Record<string, (event: Event) => void>` but those handlers will be spread onto a React element, `Dict.t<JsxEvent.Synthetic.t => unit>` is the faithful translation — but a record with optional fields for the known event handlers is more ergonomic and avoids needing `%identity` casts at the call site.
+
+**Guideline:** Prefer ergonomic types that work well at the call site over 1:1 TypeScript mappings, especially when the TypeScript type is lazily typed. A `Record<string, T>` in TypeScript often means "we didn't enumerate the keys" rather than "the keys are truly arbitrary."
+
 ### Documentation Comments
 
 Use `/** */` syntax (NOT JSDoc):
