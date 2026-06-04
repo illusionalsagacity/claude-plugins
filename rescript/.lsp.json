@@ -1,7 +1,7 @@
 {
   "rescript": {
-    "command": "npx @rescript/language-server",
-    "args": ["--stdio"],
+    "command": "npx",
+    "args": ["@rescript/language-server", "--stdio"],
     "extensionToLanguage": {
       ".res": "rescript",
       ".resi": "rescript"
