@@ -12,6 +12,7 @@
         "hooks": [
           {
             "type": "command",
+            "statusMessage": "rescript format",
             "command": "jq -r '.tool_input.file_path | select(test(\"\\.(res|resi)$\"))' | xargs -r npx rescript format"
           }
         ]
